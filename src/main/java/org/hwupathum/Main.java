@@ -52,12 +52,7 @@ public class Main {
         }
 
         // Read password from the console without echoing characters
-        char[] passwordArray = console.readPassword("Enter keystore password: ");
-
-        // Clear the password from memory
-        java.util.Arrays.fill(passwordArray, ' ');
-
-        return passwordArray;
+        return console.readPassword("Enter keystore password: ");
     }
 
     public static void main(String[] args)
