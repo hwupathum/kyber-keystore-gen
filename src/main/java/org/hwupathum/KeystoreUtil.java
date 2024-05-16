@@ -32,22 +32,22 @@ public class KeystoreUtil {
 
     private KeystoreUtil() {}
 
-    public static void addSelfSignedCertificate(KeyStore keyStore, String alias, KeyPair keyPair, String password)
+    public static void addSelfSignedCertificate(KeyStore keyStore, String alias, KeyPair keyPair, char[] password)
             throws CertificateException, OperatorCreationException, KeyStoreException {
 
         X509Certificate
                 caCertificate = KeystoreUtil.generateCertificate(keyPair.getPublic(), keyPair.getPrivate(), ISSUER, ISSUER);
-        keyStore.setKeyEntry(alias, keyPair.getPrivate(), password.toCharArray(), new Certificate[]{caCertificate});
+        keyStore.setKeyEntry(alias, keyPair.getPrivate(), password, new Certificate[]{caCertificate});
     }
 
-    public static void addCertificate(KeyStore keyStore, String alias, KeyPair signingKeyPair, KeyPair keyPair, String password)
+    public static void addCertificate(KeyStore keyStore, String alias, KeyPair signingKeyPair, KeyPair keyPair, char[] password)
             throws CertificateException, OperatorCreationException, KeyStoreException {
 
         X509Certificate signingCert = KeystoreUtil.generateCertificate(signingKeyPair.getPublic(), signingKeyPair.getPrivate(), ISSUER, ISSUER);
         PrivateKey signingKey = signingKeyPair.getPrivate();
         X509Certificate certificate = KeystoreUtil.generateCertificate(keyPair.getPublic(), signingKey, ISSUER, ISSUER);
         Certificate[] chain = new Certificate[]{certificate, signingCert};
-        keyStore.setKeyEntry(alias, keyPair.getPrivate(), password.toCharArray(), chain);
+        keyStore.setKeyEntry(alias, keyPair.getPrivate(), password, chain);
     }
 
     public static KeyPair generateKeyPair(String algorithm, AlgorithmParameterSpec algorithmParameterSpec, String provider)
