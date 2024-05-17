@@ -42,17 +42,19 @@ public class Main {
     }
 
     private static char[] getPasswordFromConsole(Scanner scanner) {
-        // Obtain a Console object
-        Console console = System.console();
 
+        Console console = System.console();
         if (console == null) {
-            System.out.print("Enter keystore password: ");
-            String password = scanner.nextLine(); // Read the input as a string
+            System.out.print("Enter Export Password:");
+            String password = scanner.nextLine();
             return password.toCharArray();
         }
-
-        // Read password from the console without echoing characters
-        return console.readPassword("Enter keystore password: ");
+        char[] password = console.readPassword("Enter Keystore Password:");
+        if (password == console.readPassword("Verifying - Enter Keystore Password:")) {
+            return password;
+        }
+        System.out.print("Error: Passwords do not match\n");
+        return new char[0];
     }
 
     public static void main(String[] args)
@@ -68,13 +70,16 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         // Prompt the user for input
-        System.out.print("Enter keystore name: ");
+        System.out.print("Enter keystore name:");
         String keystoreName = scanner.nextLine(); // Read the input as a string
 
-        System.out.print("Enter certificate alias: ");
+        System.out.print("Enter certificate alias:");
         String alias = scanner.nextLine();
 
         char[] password = getPasswordFromConsole(scanner);
+        if (password.length == 0) {
+            return;
+        }
 
         keyStore = KeyStore.getInstance(KEYSTORE_TYPE);
         keyStore.load(null, password);
