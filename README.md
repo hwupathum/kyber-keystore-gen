@@ -32,7 +32,7 @@ To get started with KyberKeystoreGen, follow these steps:
 4. Use the tool to generate and manage keystores for the Kyber algorithm:
 
     ```bash
-    java -jar target/kyber-keystore-gen-1.0-SNAPSHOT-jar-with-dependencies.jar
+    java -jar target/kyber-keystore-gen-1.0-SNAPSHOT.jar
     ```
 
 ## Usage
