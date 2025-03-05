@@ -17,6 +17,7 @@ import java.security.NoSuchProviderException;
 import java.security.Security;
 import java.security.cert.CertificateException;
 import java.security.spec.RSAKeyGenParameterSpec;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -45,12 +46,13 @@ public class Main {
 
         Console console = System.console();
         if (console == null) {
-            System.out.print("Enter Export Password:");
+            System.out.print("Enter Export Password: ");
             String password = scanner.nextLine();
             return password.toCharArray();
         }
-        char[] password = console.readPassword("Enter Keystore Password:");
-        if (password == console.readPassword("Verifying - Enter Keystore Password:")) {
+        char[] password = console.readPassword("Enter Keystore Password: ");
+        char[] verifyPassword = console.readPassword("Verifying - Enter Keystore Password: ");
+        if (Arrays.equals(password, verifyPassword)) {
             return password;
         }
         System.out.print("Error: Passwords do not match\n");

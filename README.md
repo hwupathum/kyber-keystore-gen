@@ -34,6 +34,11 @@ To get started with KyberKeystoreGen, follow these steps:
     ```bash
     java -jar target/kyber-keystore-gen-1.0-SNAPSHOT.jar
     ```
+5. Use the following command to export the public certificate of the generated keypair:
+
+    ```bash
+    openssl pkcs12 -in <keystore-name> -clcerts -nokeys -out <cert-name>
+    ```
 
 ## Usage
 
