@@ -37,7 +37,7 @@ To get started with KyberKeystoreGen, follow these steps:
 5. Use the following command to export the public certificate of the generated keypair:
 
     ```bash
-    openssl pkcs12 -in <keystore-name> -clcerts -nokeys -out <cert-name>
+    openssl pkcs12 -in <keystore-name> -clcerts -nokeys -out <cert-name> -alias <alias-name>
     ```
 
 ## Usage

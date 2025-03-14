@@ -38,3 +38,9 @@ build/
 .DS_Store
 
 .idea/
+
+### KeyStore ###
+.crt
+.pem
+.pkcs12
+.p12

@@ -1,9 +1,8 @@
 package org.hwupathum;
 
+import org.bouncycastle.jcajce.spec.MLKEMParameterSpec;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.operator.OperatorCreationException;
-import org.bouncycastle.pqc.jcajce.provider.BouncyCastlePQCProvider;
-import org.bouncycastle.pqc.jcajce.spec.KyberParameterSpec;
 
 import java.io.Console;
 import java.io.FileOutputStream;
@@ -29,8 +28,8 @@ public class Main {
             CertificateException, KeyStoreException, OperatorCreationException {
 
         // Generating a key pair for KEM
-        KeyPair keyPair = KeystoreUtil.generateKeyPair("Kyber768", KyberParameterSpec.kyber768,
-                BouncyCastlePQCProvider.PROVIDER_NAME);
+        KeyPair keyPair = KeystoreUtil.generateKeyPair("ML-KEM-768", MLKEMParameterSpec.ml_kem_768,
+                BouncyCastleProvider.PROVIDER_NAME);
         // Create a KeyPairGenerator for the signing key pair
         KeyPair signingKeyPair = KeystoreUtil.generateKeyPair("RSA",
                 new RSAKeyGenParameterSpec(2048, RSAKeyGenParameterSpec.F4), BouncyCastleProvider.PROVIDER_NAME);
@@ -65,7 +64,6 @@ public class Main {
 
         KeyStore keyStore;
 
-        Security.addProvider(new BouncyCastlePQCProvider());
         Security.addProvider(new BouncyCastleProvider());
 
         // Create a Scanner object to read input from the command line
