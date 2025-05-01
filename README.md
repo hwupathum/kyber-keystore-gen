@@ -34,10 +34,37 @@ To get started with KyberKeystoreGen, follow these steps:
     ```bash
     java -jar target/kyber-keystore-gen-1.0-SNAPSHOT.jar
     ```
-5. Use the following command to export the public certificate of the generated keypair:
+
+5. Enter keystore name, alias, password, and certificate details when prompted.
 
     ```bash
-    openssl pkcs12 -in <keystore-name> -clcerts -nokeys -out <cert-name> -alias <alias-name>
+    Enter keystore name 
+    [keystore.p12]: <keystore-name>
+    Enter certificate alias 
+    [alias]: <alias-name>
+    Enter Keystore Password: <password>
+    Re-enter new password: <password>
+    What is your first and last name?
+     [Unknown]: 
+    What is the name of your organizational unit?
+     [Unknown]: 
+    What is the name of your organization?
+     [Unknown]: 
+    What is the name of your City or Locality?
+     [Unknown]: 
+    What is the name of your State or Province?
+     [Unknown]: 
+    What is the two-letter country code for this unit?
+     [Unknown]: 
+    Is CN=Unknown, OU=Unknown, O=Unknown, L=Unknown, ST=Unknown, C=Unknown correct?
+     [no]: yes
+    Key pair and certificate added to Keystore successfully!
+    ```
+   
+6. Use the following command to export the public certificate of the generated keypair:
+
+    ```bash
+    keytool -exportcert -alias <alias-name> -keystore <keystore-name> -rfc -file <cert-name>
     ```
 
 ## Usage
